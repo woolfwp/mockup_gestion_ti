@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="2e6f425b-5f81-4b4b-a2f4-dfdf2dd2295e" activeEnvironment="Default" name="mockup-banco" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:restMockService id="f38a7a2a-a028-43e7-8a48-4c91a13b8168" port="8080" path="/" host="CAL-W-L3P09-HPF" name="REST MockupService"><con:settings/><con:properties/><con:restMockAction name="sendUser" method="POST" resourcePath="/sendUser" id="939914df-6d6e-4ce8-90a5-4730e0ef1f51"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+<con:soapui-project id="2e6f425b-5f81-4b4b-a2f4-dfdf2dd2295e" activeEnvironment="Default" name="mockup-banco" resourceRoot="" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:restMockService id="f38a7a2a-a028-43e7-8a48-4c91a13b8168" port="8080" path="/" host="CAL-W-L3P09-HPF" name="REST MockupService"><con:settings/><con:properties/><con:restMockAction name="sendUser" method="POST" resourcePath="/sendUser" id="939914df-6d6e-4ce8-90a5-4730e0ef1f51"><con:settings/><con:defaultResponse>sendUserResponse.json</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+
+def requestBody = mockRequest.getRequestContent()
+log.info "Request body: " + requestBody
+
+if( requestBody.contains("usuario_demo") )
+{
+    // return the name of the response you want to dispatch
+    return "sendUserResponse.json"
+}else {
+	return "sendUserResponseFallo.json"
+}
+
 // Script dispatcher is used to select a response based on the incoming request.&#13;
 // Here are few examples showing how to match based on path, query param, header and body&#13;
 &#13;
@@ -55,7 +67,10 @@ if( requestBody.contains("some data") )&#13;
   "idSession": "12313saasdas",
   "binary_image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=387&amp;q=80",
   "frase": "asuka"
-}</con:responseContent></con:response></con:restMockAction><con:restMockAction name="initCaptcha" method="GET" resourcePath="/initCaptcha" id="f551462c-2059-4e87-9c18-145bd4938a70"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+}</con:responseContent></con:response><con:response name="sendUserResponseFallo.json" id="b5e8660a-8d21-4e8b-87e4-cbacfcb2e0ac" httpResponseStatus="404"><con:settings/><con:responseContent>{
+  "error": "usuario inexistente",
+  "mensaje": "el usuario no ha sido creado anteriormente"
+}</con:responseContent></con:response></con:restMockAction><con:restMockAction name="initCaptcha" method="GET" resourcePath="/initCaptcha" id="f551462c-2059-4e87-9c18-145bd4938a70"><con:settings/><con:defaultResponse>initCaptchaResponse.json</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
 // Script dispatcher is used to select a response based on the incoming request.&#13;
 // Here are few examples showing how to match based on path, query param, header and body&#13;
 &#13;
@@ -113,7 +128,7 @@ if( requestBody.contains("some data") )&#13;
     "https://images.unsplash.com/photo-1541562232579-512a21360020?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
   ],
   "frase": "manga"
-}]]></con:responseContent></con:response></con:restMockAction><con:restMockAction name="checkCaptcha" method="POST" resourcePath="/checkCaptcha " id="3af1cc07-e4ef-4dd4-9c66-2950e29f0eda"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+}]]></con:responseContent></con:response></con:restMockAction><con:restMockAction name="checkCaptcha" method="POST" resourcePath="/checkCaptcha " id="3af1cc07-e4ef-4dd4-9c66-2950e29f0eda"><con:settings/><con:defaultResponse>checkCaptchaResponse_false.json</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
 // Script dispatcher is used to select a response based on the incoming request.&#13;
 // Here are few examples showing how to match based on path, query param, header and body&#13;
 &#13;
@@ -169,7 +184,7 @@ if( requestBody.contains("some data") )&#13;
   "boolean": "false"
 }</con:responseContent></con:response><con:response name="checkCaptchaResponseTrue.json" id="2e125bcd-33e7-432e-b655-b1624bea43f0" httpResponseStatus="200"><con:settings/><con:responseContent>{
   "boolean": "true"
-}</con:responseContent></con:response></con:restMockAction><con:restMockAction name="sendPassword" method="POST" resourcePath="/sendPassword" id="043b1ad0-c816-4943-8c69-70b842f4fb4f"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+}</con:responseContent></con:response></con:restMockAction><con:restMockAction name="sendPassword" method="POST" resourcePath="/sendPassword" id="043b1ad0-c816-4943-8c69-70b842f4fb4f"><con:settings/><con:defaultResponse>sendPasswordResponseTrue.json</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
 // Script dispatcher is used to select a response based on the incoming request.&#13;
 // Here are few examples showing how to match based on path, query param, header and body&#13;
 &#13;
